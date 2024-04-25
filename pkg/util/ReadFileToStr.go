@@ -11,7 +11,7 @@ import (
 // ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension.
 func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 
-	// Construct the file name based on user's choice and file extension
+	//--Construct the file name based on user's choice and file extension--
 	fileName := filepath.Join(dir, fileBaseName + fileExtension)
 
 	// Open the file
