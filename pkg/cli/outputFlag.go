@@ -4,33 +4,39 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
-
-
 func OutputFlag() (string, error) {
-	// Define flag for the output filename
+	funcName = " --<--OutputFlag--<--"
+
+	//-----Define flag for the output filename-----
 	outputFileN := flag.String(outputStr, outputFileName, "Output filename")
 	flag.Parse()
 
-	
-	asciiArt, _ := GetFinalString()
-
-	if *outputFileN != "" {
-		err := ioutil.WriteFile(*outputFileN, []byte(asciiArt), 0644)
-		if err != nil {
-			errMsg = "Error writing to file:" + err.Error()
-			return "", errors.New(errMsg)
-		}
-		fmt.Printf("Output written to %s\n", *outputFileN)
+	//-----Get ascii string to write data to outputFileName-----
+	asciiArt, errBannerToStr := BannerToStr()
+	if errBannerToStr != nil {
+		funcDirectLink = "BannerToStr--<-- "
+		funcErrorMsg = "Error converting string into asscii equivalent:"
+		logger.Error(funcErrorMsg + funcName + funcDirectLink + errBannerToStr.Error())
+		return "", errors.New(errBannerToStr.Error())
 	} else {
-		// If no output file specified, print ASCII art to stdout
-		fmt.Println(asciiArt)
+		logger.Info("String converted into its ascii equivalence successufully")
+	}
+
+	//---write ascii string to filename--------------------
+	if *outputFileN != "" {
+		errOutputFileName := os.WriteFile(*outputFileN, []byte(asciiArt), 0644)
+		if errOutputFileName != nil {
+			funcDirectLink = "WriteFile--<-- "
+			funcErrorMsg = "Erro writing to file:"
+			logger.Error(funcErrorMsg + funcName + funcDirectLink + errOutputFileName.Error())
+			return "", errors.New(errOutputFileName.Error())
+		} else {
+			successMsg = fmt.Sprintf("Output written to %s", *outputFileN)
+			logger.Info(successMsg)
+		}
 	}
 	return *outputFileN, nil
-}
-
-func WriteFile(s string, b []byte, i int) {
-	panic("unimplemented")
 }
