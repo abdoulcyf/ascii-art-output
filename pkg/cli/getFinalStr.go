@@ -2,9 +2,8 @@ package cli
 
 import (
 	"errors"
-	"fmt"
+	"os"
 
-	//"github.com/ediallocyf/output/pkg/cli"
 	"github.com/ediallocyf/output/pkg/util"
 )
 
@@ -20,9 +19,10 @@ const (
 //----------------------------------------
 
 func GetFinalString() (string, error) {
-
+	args := os.Args
+	file := args[3]
 	//----------------------------------------
-	patternContent, errPattern := util.ReadFileToStr(directory, fileExtention)
+	patternContent, errPattern := util.ReadFileToStr(directory, file, fileExtention)
 
 	if errPattern != nil {
 		errMsg = "Error : loading pattern file failed"
@@ -32,20 +32,16 @@ func GetFinalString() (string, error) {
 	patternMap, errPatternMap := util.ContentToMap(patternContent, chLength)
 
 	if errPatternMap != nil {
-		//fmt.Println(errPatternMap)
 		return "", errors.New(errPatternMap.Error())
 	}
 	//--------------------------------------------
-	cliStr, errClistr := ReadCli()
+	cliStr, errClistr := util.ReadCli()
 
 	if errClistr != nil {
-		//fmt.Println(errClistr)
 		return "", errClistr
 	}
 	//----------------------------------------------
 
 	finalStr := util.MapToStr(cliStr, patternMap, chLength)
-	fmt.Println(finalStr)
-	//-----------------------------------------
 	return finalStr, nil
 }
