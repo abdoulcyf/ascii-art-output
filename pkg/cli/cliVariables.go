@@ -8,6 +8,12 @@ import (
 const (
 	outputFileName = "banner.txt"
 	outputStr      = "output"
+
+	directory          = "../assets/"
+	fileExtention      = ".txt"
+	chLength           = 8
+	firstCh       byte = ' '
+	lastCh        byte = '~'
 )
 
 var (
@@ -15,5 +21,9 @@ var (
 		Level: slog.LevelDebug,
 	}))
 
-	errMsg string
+	//errMsg         string
+	funcName       string
+	funcDirectLink string
+	funcErrorMsg   string
+	successMsg string
 )
