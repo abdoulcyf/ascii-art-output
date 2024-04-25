@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	r, _ := cli.OutputFlag()
+	r, _ := cli.GenerateBannerText()
 	fmt.Println(r)
 }
