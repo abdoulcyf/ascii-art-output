@@ -7,7 +7,10 @@ import (
 	"github.com/ediallocyf/output/pkg/util"
 )
 
-// BannerToStr converts the received string into its asccii char equivalent
+/*
+BannerToStr converts the received string into its asccii char equivalent
+*/
+
 func BannerToStr() (string, error) {
 	funcName = " --<--BannerToStr--<--"
 	// get the second cliStr for reading the specified banner

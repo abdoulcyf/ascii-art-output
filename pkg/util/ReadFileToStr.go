@@ -8,7 +8,9 @@ import (
 	"path/filepath"
 )
 
-// ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension.
+/*
+ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension
+*/
 func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 
 	//--Construct the file name based on user's choice and file extension--
@@ -19,7 +21,7 @@ func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 	if errOpeningFile != nil {
 		errMsg := "->--failed to open file:--<--ReadFileToStr-<----Open---<--" + errOpeningFile.Error()
 		logger.Error(errMsg)
-		return "", errors.New(errMsg)
+		return "", errOpeningFile
 	}
 	defer file.Close() 
 
