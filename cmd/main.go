@@ -48,7 +48,7 @@ import (
 // 	//-----------------------------------------
 // }
 
-func main(){
+func main() {
 	r, _ := cli.OutputFlag()
 	fmt.Println(r)
 }
