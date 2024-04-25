@@ -8,23 +8,18 @@ import (
 	"path/filepath"
 )
 
-// ReadFileToStr reads the file content based on the given directory, banner, and file extension.
-func ReadFileToStr(dir, fileRootName,  fileExtension string) (string, error) {
-	//get chosen banner
-	// banner, err := PromptUserForBanner()
-	// if err != nil {
-	// 	return "", fmt.Errorf("failed to get banner: %v", err)
-	// }
+// ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension.
+func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 
 	// Construct the file name based on user's choice and file extension
-	fileName := filepath.Join(dir, fileRootName+fileExtension)
+	fileName := filepath.Join(dir, fileBaseName + fileExtension)
 
 	// Open the file
-	file, err := os.Open(fileName)
-	if err != nil {
-		errMsg := "->--failed to open file:--<--ReadFileToStr-<----Open-" + err.Error()
+	file, errOpeningFile := os.Open(fileName)
+	if errOpeningFile != nil {
+		errMsg := "->--failed to open file:--<--ReadFileToStr-<----Open---<--" + errOpeningFile.Error()
 		logger.Error(errMsg)
-		return "", errors.New("failed to open file")
+		return "", errors.New(errMsg)
 	}
 	defer file.Close() 
 
