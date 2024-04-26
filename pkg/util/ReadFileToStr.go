@@ -1,9 +1,9 @@
 package util
 
 import (
-	"bufio"
-	"errors"
+	//"bufio"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 )
@@ -11,10 +11,10 @@ import (
 /*
 ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension
 */
-func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
+func ReadFileToStr(dir, fileBaseName, fileExtension string) (string, error) {
 
 	//--Construct the file name based on user's choice and file extension--
-	fileName := filepath.Join(dir, fileBaseName + fileExtension)
+	fileName := filepath.Join(dir, fileBaseName+fileExtension)
 
 	// Open the file
 	file, errOpeningFile := os.Open(fileName)
@@ -23,16 +23,28 @@ func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 		logger.Error(errMsg)
 		return "", errOpeningFile
 	}
-	defer file.Close() 
+	defer file.Close()
 
 	// Read file content
-	scanner := bufio.NewScanner(file)
-	var fileContent string
-	for scanner.Scan() {
-		fileContent += scanner.Text() + "\n"
+	// scanner := bufio.NewScanner(file)
+	// var fileContent string
+	// for scanner.Scan() {
+	// 	fileContent += scanner.Text() + "\n"
+	// }
+	// if err := scanner.Err(); err != nil {
+	// 	return "", fmt.Errorf("error scanning file: %v", err)
+	// }
+	//var ContentFIle string
+	data, err  := io.ReadAll(file)
+	if err != nil {
+		fmt.Printf("Error in reading file %s", err)
 	}
-	if err := scanner.Err(); err != nil {
-		return "", fmt.Errorf("error scanning file: %v", err)
-	}
-	return fileContent, nil
+
+	// for _, char := range data {
+	// 	if char == '\n'{
+	// 		ContentFIle += string(char)
+	// 	}
+	// }
+	//fmt.Println(string(data))
+	return string(data), nil
 }
