@@ -3,6 +3,8 @@ package cli
 import (
 	"errors"
 	"fmt"
+
+	//"fmt"
 	"os"
 
 	"github.com/ediallocyf/output/pkg/util"
@@ -32,7 +34,7 @@ func BannerToStr() (string, error) {
 	//--------------------------------
 	patternMap, errPatternMap := util.ContentToMap(patternContent, chLength)
 
-//	fmt.Printf("patternMap----5555555555---- %v\n: ", patternMap)
+	//	fmt.Printf("patternMap----5555555555---- %v\n: ", patternMap)
 
 	if errPatternMap != nil {
 		return "", errors.New(errPatternMap.Error())
@@ -47,6 +49,6 @@ func BannerToStr() (string, error) {
 	//----------------------------------------------
 
 	finalStr := util.MapToStr(cliStr, patternMap, chLength)
-	fmt.Printf("finalStr----77777---- %s\n: ", finalStr)
+	//fmt.Printf("finalStr----77777---- %s\n: ", finalStr)
 	return finalStr, nil
 }

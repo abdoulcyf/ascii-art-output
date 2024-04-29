@@ -2,7 +2,10 @@ package util
 
 import (
 	"errors"
+	"fmt"
 	"os"
+	"strings"
+	//"strings"
 )
 
 /*
@@ -20,13 +23,27 @@ func ReadCli() (string, error) {
 
 	cliStr := args[2]
 
-	if cliStr == "" {
-		errMsg = "emtpy string"
+	cliSlice := strings.Split(cliStr, "\\n")
+	fmt.Println(cliSlice)
+
+	result := " "
+
+	for _, strItem := range cliSlice {
+		if strItem == ""{
+			errMsg = "emtpy string"
 		logger.Error(errMsg)
 		return "", errors.New(errMsg)
+		} else {
+			result += strItem
+		}
 	}
+	// if spliStr == "" {
+	// 	errMsg = "emtpy string"
+	// 	logger.Error(errMsg)
+	// 	return "", errors.New(errMsg)
+	// }
 
-	return cliStr, nil
+	return strings.Join(cliSlice, "\n"), nil
 }
 
 // args := os.Args

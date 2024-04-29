@@ -2,8 +2,8 @@ package util
 
 import (
 	//"bufio"
+	"bufio"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 )
@@ -26,25 +26,13 @@ func ReadFileToStr(dir, fileBaseName, fileExtension string) (string, error) {
 	defer file.Close()
 
 	// Read file content
-	// scanner := bufio.NewScanner(file)
-	// var fileContent string
-	// for scanner.Scan() {
-	// 	fileContent += scanner.Text() + "\n"
-	// }
-	// if err := scanner.Err(); err != nil {
-	// 	return "", fmt.Errorf("error scanning file: %v", err)
-	// }
-	//var ContentFIle string
-	data, err  := io.ReadAll(file)
-	if err != nil {
-		fmt.Printf("Error in reading file %s", err)
+	scanner := bufio.NewScanner(file)
+	var fileContent string
+	for scanner.Scan() {
+		fileContent += scanner.Text() + "\n"
 	}
-
-	// for _, char := range data {
-	// 	if char == '\n'{
-	// 		ContentFIle += string(char)
-	// 	}
-	// }
-	//fmt.Println(string(data))
-	return string(data), nil
+	if err := scanner.Err(); err != nil {
+		return "", fmt.Errorf("error scanning file: %v", err)
+	}
+	return fileContent, nil
 }
