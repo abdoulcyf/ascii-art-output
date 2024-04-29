@@ -23,7 +23,7 @@ const (
 	twoLines    = "\n\n"
 	newLine     = "\n"
 
-	linesNumber = lastChar - firstChar
+	linesNumber = (lastChar - firstChar)
 )
 
 var (

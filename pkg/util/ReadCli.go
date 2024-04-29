@@ -2,10 +2,8 @@ package util
 
 import (
 	"errors"
-	"fmt"
 	"os"
 	"strings"
-	//"strings"
 )
 
 /*
@@ -24,39 +22,18 @@ func ReadCli() (string, error) {
 	cliStr := args[2]
 
 	cliSlice := strings.Split(cliStr, "\\n")
-	fmt.Println(cliSlice)
+	var result []string 
 
-	result := " "
-
-	for _, strItem := range cliSlice {
+	for _, strItem := range cliSlice{
+		strItem = strings.Trim(strItem, "\n")
 		if strItem == ""{
-			errMsg = "emtpy string"
-		logger.Error(errMsg)
-		return "", errors.New(errMsg)
+			errMsg = "Empty string: ---ReadCli--<<---strItem--"
+			logger.Error(errMsg)
+			return "", errors.New(errMsg)
 		} else {
-			result += strItem
+			result = append(result, strItem)
 		}
 	}
-	// if spliStr == "" {
-	// 	errMsg = "emtpy string"
-	// 	logger.Error(errMsg)
-	// 	return "", errors.New(errMsg)
-	// }
-
-	return strings.Join(cliSlice, "\n"), nil
+	return strings.Join(result, "\n"), nil
 }
 
-// args := os.Args
-// if len(args) != 2 {
-// 	errMsg = "more than 2 input arguments"
-// 	logger.Error(errMsg)
-// 	return "", errors.New(errMsg)
-// }
-
-//cliStr := args[1]
-
-// if cliStr == "" {
-// 	errMsg = "emtpy string"
-// 	logger.Error(errMsg)
-// 	return "", errors.New(errMsg)
-// }
