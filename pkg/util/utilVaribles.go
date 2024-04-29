@@ -3,7 +3,6 @@ package util
 import (
 	"log/slog"
 	"os"
-	"strings"
 )
 
 const (
@@ -33,5 +32,5 @@ var (
 
 	errMsg      string
 	logMsg      string
-	fileContent strings.Builder
+	//fileContent strings.Builder
 )

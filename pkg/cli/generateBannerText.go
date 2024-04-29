@@ -7,35 +7,39 @@ import (
 )
 
 // GenerateBannerText generates ASCII art banners from input text, allowing users to customize styling and output file name."
-func GenerateBannerText() (string, error) {
-	funcName = " --<--OutputFlag--<--"
-	defer flag.Parse()
-	//-----Define flag for the output filename-----
-	outputFileN := flag.String(outputStr, outputFileName, "Output filename")
+func GenerateBannerText(defaultOutputFileName string) (string, error) {
+	funcName := "GenerateBannerText"
+	var outputFileName string
 
-	//-----Get ascii string to write data to outputFileName-----
+	// Define flag for the output filename
+	flag.StringVar(&outputFileName, "output", defaultOutputFileName, "Output filename")
+
+	// Parse flags
+	flag.Parse()
+
+	// Replace "\\n" with actual newline character
+
+	// Get ASCII string to write data to outputFileName
 	asciiArt, errBannerToStr := BannerToStr()
 	if errBannerToStr != nil {
-		funcDirectLink = "BannerToStr--<-- "
-		funcErrorMsg = "Error converting string into asscii equivalent:"
+		funcDirectLink := "BannerToStr"
+		funcErrorMsg := "Error converting string into ASCII equivalent: "
 		logger.Error(funcErrorMsg + funcName + funcDirectLink + errBannerToStr.Error())
 		return "", errBannerToStr
-	} else {
-		logger.Info("String converted into its ascii equivalence successufully")
 	}
+	logger.Info("String converted into its ASCII equivalent successfully")
 
-	//---write ascii string to outputFileName----------------
-	if *outputFileN != "" {
-		errOutputFileName := os.WriteFile(*outputFileN, []byte(asciiArt), 0644)
+	// Write ASCII string to outputFileName
+	if outputFileName != "" {
+		errOutputFileName := os.WriteFile(outputFileName, []byte(asciiArt), 0644)
 		if errOutputFileName != nil {
-			funcDirectLink = "WriteFile--<-- "
-			funcErrorMsg = "Erro writing to file:"
+			funcDirectLink := "WriteFile"
+			funcErrorMsg := "Error writing to file: "
 			logger.Error(funcErrorMsg + funcName + funcDirectLink + errOutputFileName.Error())
 			return "", errOutputFileName
-		} else {
-			successMsg = fmt.Sprintf("Output written to %s", *outputFileN)
-			logger.Info(successMsg)
 		}
+		successMsg := fmt.Sprintf("Output written to %s", outputFileName)
+		logger.Info(successMsg)
 	}
-	return *outputFileN, nil
+	return outputFileName, nil
 }

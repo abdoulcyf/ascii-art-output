@@ -3,7 +3,7 @@ package cli
 import (
 	"errors"
 	"os"
-
+	
 	"github.com/ediallocyf/output/pkg/util"
 )
 
@@ -18,6 +18,8 @@ func BannerToStr() (string, error) {
 	chosenBanner := args[3]
 	//----------------------------------------
 	patternContent, errPattern := util.ReadFileToStr(directory, chosenBanner, fileExtention)
+
+	
 
 	if errPattern != nil {
 		funcDirectLink = "ReadFileToStr--<-- "
@@ -40,5 +42,6 @@ func BannerToStr() (string, error) {
 	//----------------------------------------------
 
 	finalStr := util.MapToStr(cliStr, patternMap, chLength)
+	//finalStr = strings.ReplaceAll(finalStr, "\\n", "\n")
 	return finalStr, nil
 }
