@@ -5,7 +5,7 @@ import (
 	"fmt"
 	//"fmt"
 	"os"
-
+	
 	"github.com/ediallocyf/output/pkg/util"
 )
 
@@ -22,7 +22,6 @@ func BannerToStr() (string, error) {
 	//----------------------------------------
 	patternContent, errPattern := util.ReadFileToStr(directory, chosenBanner, fileExtention)
 
-	//fmt.Printf("patternContent----4444444444---- %s\n: ", patternContent)
 
 	if errPattern != nil {
 		funcDirectLink = "ReadFileToStr--<-- "
@@ -48,6 +47,6 @@ func BannerToStr() (string, error) {
 	//----------------------------------------------
 
 	finalStr := util.MapToStr(cliStr, patternMap, chLength)
-	//fmt.Printf("finalStr----77777---- %s\n: ", finalStr)
+
 	return finalStr, nil
 }

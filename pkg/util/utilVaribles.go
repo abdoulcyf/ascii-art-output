@@ -3,8 +3,6 @@ package util
 import (
 	"log/slog"
 	"os"
-	//"strings"
-)
 
 const (
 	standard   = "standard"

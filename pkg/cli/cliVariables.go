@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	outputFileName = "banner.txt"
-	outputStr      = "output"
+	
+	//outputStr      = "output"
 
 	directory          = "../assets/"
 	fileExtention      = ".txt"
