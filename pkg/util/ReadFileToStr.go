@@ -1,6 +1,7 @@
 package util
 
 import (
+	//"bufio"
 	"bufio"
 	"fmt"
 	"os"
@@ -10,10 +11,10 @@ import (
 /*
 ReadFileToStr reads the file content based on the given directory, fileBaseName, and file extension
 */
-func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
+func ReadFileToStr(dir, fileBaseName, fileExtension string) (string, error) {
 
 	//--Construct the file name based on user's choice and file extension--
-	fileName := filepath.Join(dir, fileBaseName + fileExtension)
+	fileName := filepath.Join(dir, fileBaseName+fileExtension)
 
 	// Open the file
 	file, errOpeningFile := os.Open(fileName)
@@ -22,7 +23,7 @@ func ReadFileToStr(dir, fileBaseName,  fileExtension string) (string, error) {
 		logger.Error(errMsg)
 		return "", errOpeningFile
 	}
-	defer file.Close() 
+	defer file.Close()
 
 	// Read file content
 	scanner := bufio.NewScanner(file)
