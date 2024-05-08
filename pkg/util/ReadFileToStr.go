@@ -19,8 +19,9 @@ func ReadFileToStr(dir, fileBaseName, fileExtension string) (string, error) {
 	// Open the file
 	file, errOpeningFile := os.Open(fileName)
 	if errOpeningFile != nil {
-		errMsg := "->--failed to open file:--<--ReadFileToStr-<----Open---<--" + errOpeningFile.Error()
-		logger.Error(errMsg)
+		errMsg := "Usage: go run . [OPTION] [STRING] [BANNER] \n" +
+			"Example: go run . --output=<fileName.txt> something standard"
+		fmt.Println(errMsg)
 		return "", errOpeningFile
 	}
 	defer file.Close()

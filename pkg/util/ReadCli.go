@@ -2,7 +2,9 @@ package util
 
 import (
 	"errors"
+	"fmt"
 	"os"
+	//"path/filepath"
 	"strings"
 )
 
@@ -22,18 +24,24 @@ func ReadCli() (string, error) {
 	cliStr := args[2]
 
 	cliSlice := strings.Split(cliStr, "\\n")
-	var result []string 
+	fmt.Println("=====>", cliSlice)
+	// var result []string 
 
-	for _, strItem := range cliSlice{
-		strItem = strings.Trim(strItem, "\n")
-		if strItem == ""{
-			errMsg = "Empty string: ---ReadCli--<<---strItem--"
-			logger.Error(errMsg)
-			return "", errors.New(errMsg)
-		} else {
-			result = append(result, strItem)
-		}
-	}
-	return strings.Join(result, "\n"), nil
+	// for _, strItem := range cliSlice{
+	// 	strItem = strings.TrimRight(strItem, "\n")
+	// 	if strItem == ""{
+	// 		errMsg = "Empty string: ---ReadCli--<<---strItem--"
+	// 		logger.Error(errMsg)
+	// 		return "", errors.New(errMsg)
+	// 	} else {
+	// 		result = append(result, strItem)
+	// 	}
+	// }
+
+	charArr := strings.Join(cliSlice, "\n")
+	charArr = strings.TrimRight(charArr, "\n")
+	
+	fmt.Println(charArr)
+	return charArr , nil
 }
 
